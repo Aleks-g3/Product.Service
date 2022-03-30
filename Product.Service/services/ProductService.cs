@@ -10,6 +10,12 @@ namespace Product.Service.services
     public class ProductService : IProductService
     {
         public ProductService(IProductRepository productRepository)
+        {
+            this.productRepository = productRepository;
+        }
+
+        public IProductRepository productRepository { get; }
+
         public Task<Guid> AddAsync(ProductEntity product)
         {
             throw new NotImplementedException();
