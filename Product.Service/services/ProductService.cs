@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Product.Service.services
+namespace Product.Service.Services
 {
     public class ProductService : IProductService
     {

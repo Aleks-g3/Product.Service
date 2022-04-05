@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Product.Service.Context;
 using Product.Service.Context.Repositories;
-using Product.Service.services;
+using Product.Service.Services;
 using System;
 using System.IO;
 using System.Reflection;

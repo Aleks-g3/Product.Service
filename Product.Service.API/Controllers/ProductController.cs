@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Product.Service.API.Entities;
 using Product.Service.Entities;
-using Product.Service.services;
+using Product.Service.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
