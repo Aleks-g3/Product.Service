@@ -9,8 +9,9 @@ namespace Product.Service.services
 {
     public interface IProductService
     {
-        Task<Guid> AddAsync(ProductEntity product);
+        Task<Guid> AddAsync(ProductEntity productEntity);
         Task UpdateAsync(Guid id, ProductEntity newProduct);
+        Task<IReadOnlyCollection<ProductEntity>> GetAllAsync();
         Task<ProductEntity> GetByIdAsync(Guid id);
         Task DeleteAsync(Guid id);
     }

@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Product.Service.Context
 {
-    public class Context : DbContext
+    public class DatabaseContext : DbContext
     {
         public DbSet<ProductEntity> Products { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

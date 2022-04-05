@@ -9,31 +9,71 @@ namespace Product.Service.services
 {
     public class ProductService : IProductService
     {
+        private readonly IProductRepository productRepository;
+
         public ProductService(IProductRepository productRepository)
         {
             this.productRepository = productRepository;
         }
 
-        public IProductRepository productRepository { get; }
-
-        public Task<Guid> AddAsync(ProductEntity product)
+        public async Task<Guid> AddAsync(ProductEntity productEntity)
         {
-            throw new NotImplementedException();
+            ValidationProduct(productEntity);
+
+            var product = ProductEntity.CreateProduct(productEntity);
+
+            await productRepository.AddAsync(product);
+
+            return product.Id;
         }
 
-        public Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var product = await GetAsync(id);
+            await productRepository.DeleteAsync(product);
         }
 
-        public Task<ProductEntity> GetByIdAsync(Guid id)
+        public async Task<ProductEntity> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await GetAsync(id);
         }
 
-        public Task UpdateAsync(Guid id, ProductEntity newProduct)
+        public async Task UpdateAsync(Guid id, ProductEntity newProduct)
         {
-            throw new NotImplementedException();
+            var product = await GetAsync(id);
+
+            product.Update(newProduct);
+
+            await productRepository.UpdateAsync(product);
+        }
+
+        private void ValidationProduct(ProductEntity productEntity)
+        {
+            if (string.IsNullOrWhiteSpace(productEntity.Name))
+            {
+                throw new Exception("Name is empty");
+            }
+
+            if (productEntity.Price == 0)
+            {
+                throw new Exception("Price is null");
+            }
+        }
+
+        private async Task<ProductEntity> GetAsync(Guid id)
+        {
+            var product = await productRepository.GetByIdAsync(id);
+            if (product == null)
+            {
+                throw new Exception("Not Found Product id");
+            }
+
+            return product;
+        }
+
+        public async Task<IReadOnlyCollection<ProductEntity>> GetAllAsync()
+        {
+            return await productRepository.GetAllAsync();
         }
     }
 }

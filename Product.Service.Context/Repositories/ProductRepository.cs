@@ -11,9 +11,9 @@ namespace Product.Service.Context.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        public Context context { get; }
+        private readonly DatabaseContext context;
 
-        public ProductRepository(Context context)
+        public ProductRepository(DatabaseContext context)
         {
             this.context = context;
         }
@@ -24,7 +24,7 @@ namespace Product.Service.Context.Repositories
             await context.SaveChangesAsync();
         }
 
-        public async Task<IReadOnlyCollection<ProductEntity>> GetAsync()
+        public async Task<IReadOnlyCollection<ProductEntity>> GetAllAsync()
         {
             return await context.Products.ToListAsync();
         }
@@ -40,9 +40,10 @@ namespace Product.Service.Context.Repositories
             await context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(ProductEntity product)
+        public async Task DeleteAsync(ProductEntity product)
         {
-            throw new NotImplementedException();
+            context.Products.Remove(product);
+            await context.SaveChangesAsync();
         }
     }
 }

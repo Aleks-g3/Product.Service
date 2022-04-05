@@ -11,7 +11,7 @@ namespace Product.Service.services
     {
         Task AddAsync(ProductEntity product);
         Task UpdateAsync(ProductEntity product);
-        Task<IReadOnlyCollection<ProductEntity>> GetAsync();
+        Task<IReadOnlyCollection<ProductEntity>> GetAllAsync();
         Task<ProductEntity> GetByIdAsync(Guid id);
         Task DeleteAsync(ProductEntity product);
     }
